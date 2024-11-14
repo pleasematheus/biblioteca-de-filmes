@@ -1,0 +1,138 @@
+<style>
+/* CSS para estilização do componente de filme */
+#<%= dom_id(movie) %> {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.photo-item {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.photo-item img {
+  max-width: 100px;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-item img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.photo-item .btn {
+  display: block;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px 10px;
+  background-color: #5b9bd5;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.photo-item .btn:hover {
+  background-color: #4a8ac3;
+}
+
+p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+strong {
+  color: #333;
+}
+
+a {
+  color: #5b9bd5;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #4a8ac3;
+}
+
+/* Estilização dos links "Editar" e "Voltar" */
+.action-links {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.action-links a {
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.action-links .edit-link {
+  background-color: #5b9bd5;
+  color: #fff;
+}
+
+.action-links .edit-link:hover {
+  background-color: #4a8ac3;
+}
+
+.action-links .back-link {
+  background-color: #ccc;
+  color: #333;
+}
+
+.action-links .back-link:hover {
+  background-color: #aaa;
+}
+
+</style>
+<div id="<%= dom_id(movie) %>">
+  <% if @movie && @movie.photos.attached? %>
+    <% @movie.photos.each do |photo| %>
+      <div class="photo-item">
+        <%= link_to url_for(photo), target: "_blank" do %>
+          <%= image_tag photo %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <p>
+    <strong><%= t('activerecord.attributes.movie.title') %>:</strong>
+    <%= movie.title %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.movie.description') %>:</strong>
+    <%= movie.description %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.movie.release_year') %>:</strong>
+    <%= movie.release_year.strftime("%d/%m/%Y") %>
+  </p>
+
+  <div class="action-links">
+    <%= link_to 'Editar', edit_movie_path(movie), class: 'edit-link' %>
+    <%= link_to 'Voltar', movies_path, class: 'back-link' %>
+  </div>
+</div>

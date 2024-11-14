@@ -1,0 +1,89 @@
+<style>
+/* CSS para estilização do formulário de recuperação de senha */
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.field {
+  margin-bottom: 15px;
+}
+
+.field label {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.field input[type="email"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.field input[type="email"]:focus {
+  border-color: #5b9bd5;
+  box-shadow: 0px 0px 5px rgba(91, 155, 213, 0.5);
+}
+
+.actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.actions input[type="submit"] {
+  background-color: #5b9bd5;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.actions input[type="submit"]:hover {
+  background-color: #4a8ac3;
+}
+
+/* Responsividade */
+@media (max-width: 576px) {
+  .field label {
+    text-align: left;
+  }
+
+  .actions input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+  }
+}
+</style>
+
+<div class="container">
+  <h2>Forgot your password?</h2>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Send me reset password instructions" %>
+    </div>
+  <% end %>
+
+  <%= render "users/shared/links" %>
+</div>

@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "application": "/assets/application-3897b39d0f7fe7e947af9b84a1e1304bb30eb1dadb983104797d0a5e26a08736.js",
+    "bootstrap": "/assets/bootstrap-a566fc517e8dd51de5e32155ffb745f66daeb883286d419f941a435c47f6869a.js",
+    "@popperjs/core": "https://ga.jspm.io/npm:@popperjs/core@2.11.8/lib/index.js"
+  }
+}

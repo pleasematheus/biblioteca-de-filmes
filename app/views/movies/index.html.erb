@@ -1,0 +1,155 @@
+<style>
+/* CSS aprimorado para estilização da página de filmes */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e9eef5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+header {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+header p {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+}
+
+header p span {
+  font-weight: bold;
+  color: #5b9bd5;
+}
+
+header .logout-button {
+  margin-top: 15px;
+}
+
+.notice {
+  color: #28a745;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+#movies {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+#movies .movie {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  overflow: hidden;
+  position: relative;
+}
+
+#movies .movie:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+#movies .movie p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #555;
+}
+
+#movies .movie a {
+  color: #5b9bd5;
+  font-weight: bold;
+  text-decoration: none;
+  position: relative;
+}
+
+#movies .movie a:hover {
+  color: #4a8ac3;
+}
+
+#movies .movie a::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: #5b9bd5;
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#movies .movie a:hover::after {
+  opacity: 1;
+}
+
+.new-movie-link {
+  display: inline-block;
+  text-align: center;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #5b9bd5;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.new-movie-link:hover {
+  background-color: #4a8ac3;
+}
+
+</style>
+
+<div class="container">
+  <header>
+    <p>Olá <span><%= user_signed_in? ? current_user.email : 'visitante' %></span></p>
+    <div class="logout-button">
+      <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+    </div>
+  </header>
+
+  <p class="notice"><%= notice %></p>
+
+  <h1><%= t('activerecord.attributes.index') %></h1>
+
+  <div id="movies">
+    <% @movies.each do |movie| %>
+      <div class="movie">
+        <%= render movie %>
+        <p>
+          <%= link_to t('activerecord.attributes.movie.buttons.show'), movie %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to t('activerecord.attributes.movie.buttons.new'), new_movie_path, class: 'new-movie-link' %>
+</div>

@@ -1,0 +1,47 @@
+<style>
+/* CSS para centralizar textos e botões */
+.centered {
+  text-align: center;
+}
+
+.centered a {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.centered .show-link {
+  background-color: #5b9bd5;
+}
+
+.centered .show-link:hover {
+  background-color: #4a8ac3;
+}
+
+.centered .back-link {
+  background-color: #ccc;
+  color: #333;
+}
+
+.centered .back-link:hover {
+  background-color: #aaa;
+}
+</style>
+
+<div class="centered">
+  <h1><%= t('activerecord.attributes.movie.titles.editing') %></h1>
+
+  <%= render "form", movie: @movie %>
+
+  <br>
+
+  <div>
+    <%= link_to t('activerecord.attributes.movie.buttons.show'), @movie, class: 'show-link' %>
+    <%= link_to t('activerecord.attributes.movie.buttons.back'), movies_path, class: 'back-link' %>
+  </div>
+</div>
